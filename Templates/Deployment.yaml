@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ms-demo
+  name: deployment2-ms-demo
+  namespace: ms-demo
+spec:
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: ms-demo
+    spec:
+      containers:
+        - image: mcr.microsoft.com/azuredocs/aci-helloworld
+          name: aci-helloworld
+  selector:
+    matchLabels:
+      app: ms-demo
+---
+
