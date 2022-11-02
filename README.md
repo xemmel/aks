@@ -115,3 +115,35 @@ kubectl create namespace $namespace;
 kubectl get namespaces
 
 ```
+
+### a simple hello world pod/service deployment
+
+```powershell
+
+### Create Namespace
+
+kubectl create namespace ms-demo
+
+
+### Create Deployment
+
+kubectl create deployment deployment-ms-demo `
+	--image mcr.microsoft.com/azuredocs/aci-helloworld `
+	--replicas=2 `
+	--namespace ms-demo `
+	;
+	
+#### Get Yaml for deployment
+
+kubectl get deployment.apps/deployment-mlc-temp -n mlc-temp -o yaml
+	
+### Create Service 
+
+kubectl expose deployment deployment-ms-demo  `
+	--type LoadBalancer `
+	--namespace ms-demo `
+	--name service-ms-demo `
+	--port 80
+	;
+
+```
