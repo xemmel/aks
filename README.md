@@ -46,8 +46,61 @@ az login --use-device-code
 
 ### Create an AKS Cluster
 
-.... Coming up
+
 
 ```powershell
+
+## Create Resource Group
+
+$rgName = "your_resource_group_name";
+$location = "westeurope"; ## Soon to be "Denmark East"??
+
+$rg = az group create --name $rgName --location $location;
+$rg;
+
+### Create AKS Cluster
+
+$clusterName = "your_aks_cluster_name";
+
+$cluster = az aks create --name $clusterName `
+	--resource-group $rgName `
+	--generate-ssh-keys `
+	 --node-count 1 `
+	 --no-wait
+	 ;
+$cluster;
+
+```
+
+### Connect kubectl to your Cluster
+
+```powershell
+
+az aks get-credentials --name $clusterName --resource-group $rgName
+
+```
+
+### Check your Context (Which Kubernetes Cluster are you pointing at)
+
+```powershell
+
+kubectl config get-contexts
+
+```
+
+### Create namespace
+
+```powershell
+$namespace = "sandbox";
+
+kubectl create namespace $namespace;
+
+```
+
+### List all namespaces
+
+```powershell
+
+kubectl get namespaces
 
 ```
