@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ms-demo-sql
+  name: deployment2-ms-demo-sql
+  namespace: ms-demo-sql
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: ms-demo-sql
+    spec:
+      containers:
+        - image: mcr.microsoft.com/mssql/server:2022-latest
+          name: aci-sqlserver
+          env:
+          - name: d
+            value: "D"
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: MSSQL_SA_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: config-ms-demo-sql         
+                key: sa_password
+  selector:
+    matchLabels:
+      app: ms-demo-sql
+---
+

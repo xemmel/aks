@@ -170,3 +170,35 @@ kubectl scale deployment `
 	--replicas 10
 
 ```
+
+
+### Elastic Search
+
+```yaml
+
+spec:
+      containers:
+      - image: elasticsearch:7.17.3
+        name: elasticimage
+        ports:
+        - containerPort: 9200
+        - containerPort: 9300
+        env:
+        - name: "discovery.type"
+          value: "single-node"
+Service
+
+spec:
+  selector:
+    app: elastic
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      name: 'h1'
+      port: 9200
+      targetPort: 9200
+    - protocol: TCP
+      name: 'h2'
+      port: 9300
+
+```
