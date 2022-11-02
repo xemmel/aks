@@ -147,3 +147,26 @@ kubectl expose deployment deployment-ms-demo  `
 	;
 
 ```
+
+#### Commands
+
+```powershell
+
+### Everything in the namespace
+kubectl get all -n ms-demo
+
+### Describe the service (LB)
+kubectl describe service/service-ms-demo -n ms-demo
+
+### Get pods IP
+kubectl get pods -n ms-demo -o wide
+
+
+#### Scale
+
+kubectl scale deployment `
+	deployment-ms-demo `
+	--namespace ms-demo `
+	--replicas 10
+
+```
