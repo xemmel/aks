@@ -233,3 +233,21 @@ helm install ingress-nginx ingress-nginx/ingress-nginx `
 
 ```
 
+
+### Secrets and ACR
+
+```powershell
+
+image = acrmsdenmark.azurecr.io/therealmsapi:0.9
+
+username = acrmsdenmark
+
+password = +ss4yjgxCCdlLF6N6R1rVg11Aq1a0kUR
+
+
+
+
+https://learn.microsoft.com/en-us/azure/container-registry/container-registry-auth-kubernetes#create-an-image-pull-secret
+
+
+```
