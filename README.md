@@ -162,6 +162,11 @@ kubectl describe service/service-ms-demo -n ms-demo
 kubectl get pods -n ms-demo -o wide
 
 
+## Log a pod
+
+kubectl logs pod/deployment2-ms-demo-sql-b99d95bc7-44lj9 -n ms-demo-sql -f
+
+
 #### Scale
 
 kubectl scale deployment `
@@ -202,3 +207,29 @@ spec:
       port: 9300
 
 ```
+
+
+### Ingress
+
+```powershell
+
+choco install kubernetes-helm -y
+
+```
+
+#### Install Ingress Controller
+
+```powershell
+
+$Namespace = 'ingress-basic'
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+
+helm install ingress-nginx ingress-nginx/ingress-nginx `
+  --create-namespace `
+  --namespace $Namespace `
+  --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz
+
+```
+
